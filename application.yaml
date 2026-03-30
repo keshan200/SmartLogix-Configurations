@@ -1,6 +1,10 @@
 eureka:
   client:
     service-url:
-      defaultZone: http://vm-node-a.platform:8761/eureka,http://vm-node-b.platform:8761/eureka,http://vm-node-c.platform:8761/eureka
-  instance:
+      defaultZone:
+        - http://vm-node-a.platform:8761/eureka/
+        - http://vm-node-b.platform:8761/eureka/
+        - http://vm-node-c.platform:8761/eureka/
     prefer-ip-address: true
+    register-with-eureka: true
+    fetch-registry: true
