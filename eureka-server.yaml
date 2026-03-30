@@ -1,15 +1,9 @@
-server:
-  port: 8761
-
-spring:
-  application:
-    name: eureka-server
-
 eureka:
+  instance:
+    hostname: ${HOSTNAME_ENV_VARIABLE} # නැත්නම් node එකේ නම (vm-node-a)
+    prefer-ip-address: false # Replicas වලදී hostname එක වැදගත්
   client:
-    register-with-eureka: false
-    fetch-registry: false
+    register-with-eureka: true
+    fetch-registry: true
     service-url:
       defaultZone: http://vm-node-a.platform:8761/eureka,http://vm-node-b.platform:8761/eureka,http://vm-node-c.platform:8761/eureka
-  instance:
-    prefer-ip-address: true
