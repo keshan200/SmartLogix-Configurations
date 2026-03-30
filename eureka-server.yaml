@@ -10,9 +10,9 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://vm-node-a.platform:8761/eureka,
-        http://vm-node-b.platform:8761/eureka,
-        http://vm-node-c.platform:8761/eureka
+      defaultZone: http://vm-node-a.platform:8888/eureka,
+        http://vm-node-b.platform:8888/eureka,
+        http://vm-node-c.platform:8888/eureka
   instance:
     hostname: ${HOSTNAME}
     prefer-ip-address: true
