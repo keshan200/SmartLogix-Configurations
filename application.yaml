@@ -1,19 +1,8 @@
 eureka:
   client:
-    # Cluster එකක් නිසා මේ දෙක අනිවාර්යයෙන් true විය යුතුයි
     register-with-eureka: true
     fetch-registry: true
     service-url:
       defaultZone: http://vm-node-a.platform:8761/eureka,http://vm-node-b.platform:8761/eureka,http://vm-node-c.platform:8761/eureka
-
   instance:
-    # වැදගත්ම දේ: Dashboard එකේ localhost පේන්නේ මේක නැති නිසා.
-    # හැම VM එකකම ඒ ඒ VM එකට අදාළ නම (vm-node-a, b හෝ c) මෙතනට දෙන්න.
-    hostname: vm-node-a.platform
-    prefer-ip-address: false
-    # Dashboard එකේ හරියටම පේන්න මේකත් දාන්න
-    instance-id: ${spring.application.name}:${eureka.instance.hostname}:${server.port}
-
-  server:
-    # Replicas අතර data sync වෙන්න මේක false කරන්න (Testing වලදී ලේසියි)
-    enable-self-preservation: false
+    prefer-ip-address: true
