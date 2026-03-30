@@ -1,8 +1,28 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: eureka-server
+
 eureka:
+  instance:
+    # මෙතනට ඔයා ඉන්න VM එකේ IP එක අනිවාර්යයෙන්ම දෙන්න
+    hostname: 10.148.0.4
+    prefer-ip-address: true
+    # Dashboard එකේ ලස්සනට පේන්න මේක දෙන්න
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+  
   client:
+    # මේ දෙක true වීම අනිවාර්යයි
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://vm-node-a.platform:8761/eureka,http://vm-node-b.platform:8761/eureka,http://vm-node-c.platform:8761/eureka
-  instance:
-    prefer-ip-address: true
+      # මෙතනට Nodes 3ම IP addresses ටික comma (,) එකකින් වෙන් කරලා දෙන්න
+      defaultZone: http://10.148.0.2:8761/eureka,http://10.148.0.3:8761/eureka,http://10.148.0.4:8761/eureka
+  
+  server:
+    # Cluster එකක් හදනකොට මේක false කරන එක ලේසියි (Testing වලදී ලේසියයි)
+    enable-self-preservation: false
+    # අනිත් nodes වලින් data ඉක්මනින් ගන්න මේක දාන්න
+    peer-node-read-timeout-ms: 2000
