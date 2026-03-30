@@ -2,15 +2,28 @@ server:
   port: 8080
 
 spring:
-  application:
-    name: api-gateway
   cloud:
-    config:
-      uri: http://config.platform:8888
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://vm-node-a.platform:8761/eureka,http://vm-node-b.platform:8761/eureka,http://vm-node-c.platform:8761/eureka
-    instance:
-      prefer-ip-address: true
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: user-service
+              uri: lb://USER-SERVICE
+              predicates:
+                - Path=/api/users/**
+            - id: job-service
+              uri: lb://JOB-SERVICE
+              predicates:
+                - Path=/api/jobs/**
+            - id: file-service
+              uri: lb://FILE-SERVICE
+              predicates:
+                - Path=/api/files/**
+          default-filters:
+            - PreserveHostHeader
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowedOrigins: "*"
+                allowed-methods: "*"
+                allowed-headers: "*"

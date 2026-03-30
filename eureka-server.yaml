@@ -1,28 +1,2 @@
 server:
   port: 8761
-
-spring:
-  application:
-    name: eureka-server
-
-eureka:
-  instance:
-    # වැදගත්: මෙම hostname එක ඒ ඒ VM එකේ /etc/hosts වල තියෙන නමට සමාන විය යුතුයි
-    hostname: ${vmnode.hostname:localhost}
-    prefer-ip-address: false
-    # Registry එකේ පෙන්වන නම සකස් කිරීම
-    instance-id: ${spring.application.name}:${vmnode.hostname}:${server.port}
-  
-  client:
-    # Standalone mode එක නෙවෙයි නිසා මේවා true විය යුතුයි
-    register-with-eureka: true
-    fetch-registry: true
-    
-    # අනෙක් Nodes වල ලිපිනයන් මෙහි ඇතුළත් කරන්න
-    service-url:
-      defaultZone: http://vm-node-a.platform:8761/eureka,http://vm-node-b.platform:8761/eureka,http://vm-node-c.platform:8761/eureka
-  
-  server:
-    # Replicas අතර data ඉක්මනින් sync වීමට සහ status එක නිවැරදිව පෙන්වීමට
-    enable-self-preservation: false
-    wait-time-in-ms-when-sync-empty: 0
