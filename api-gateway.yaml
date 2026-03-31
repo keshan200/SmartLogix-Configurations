@@ -28,5 +28,3 @@ spring:
                 allowed-methods: "*"
                 allowed-headers: "*"
 
-  server:
-    port: 8080
